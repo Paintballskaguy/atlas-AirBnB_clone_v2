@@ -21,6 +21,7 @@ def hbnb():
     """Displays 'HBNB' at the /hbnb URL"""
     return "HBNB"
 
+
 @app.route('/c/<text>', strict_slashes=False)
 def c_text(text):
     """
@@ -28,6 +29,7 @@ def c_text(text):
     replaces all the underscores with spaces.
     """
     return "C " + text.replace('_', ' ')
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
