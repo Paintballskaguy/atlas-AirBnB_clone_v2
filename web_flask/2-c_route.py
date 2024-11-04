@@ -21,7 +21,7 @@ def hbnb():
     """Displays 'HBNB' at the /hbnb URL"""
     return "HBNB"
 
-@app.route('c/<text>', strict_slashes=False)
+@app.route('/c/<text>', strict_slashes=False)
 def c_text(text):
     """
     Displays 'C' followed by value of text
