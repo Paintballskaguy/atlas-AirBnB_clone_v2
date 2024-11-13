@@ -1,11 +1,8 @@
 import os
-from dotenv import load_dotenv
-
-load_dotenv()
 
 from models.engine.file_storage import FileStorage
 from models.engine.db_storage import DBStorage
-from models.base_model import Base
+
 
 storage_t = os.environ.get('HBNB_TYPE_STORAGE')
 

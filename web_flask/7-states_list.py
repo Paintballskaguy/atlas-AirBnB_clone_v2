@@ -18,6 +18,7 @@ def teardown_db(__exception):
 def states_list():
     """Displays an HTML page with a list of all State objects sorted by name."""
     states = sorted(storage.all(State).values(), key=lambda state: state.name)
+    print("Fetched states:", states)  # Debugging line
     return render_template('7-states_list.html', states=states)
 
 if __name__ == "__main__":

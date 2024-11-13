@@ -26,16 +26,12 @@ class DBStorage:
     __session = None
 
     def __init__(self):
-        engine_url = (
-            f'mysql+pymysql://{getenv("HBNB_MYSQL_USER")}:'
-            f'{getenv("HBNB_MYSQL_PWD")}@{getenv("HBNB_MYSQL_HOST")}/'
-            f'{getenv("HBNB_MYSQL_DB")}'
-        )
-        self.__engine = create_engine(engine_url, pool_pre_ping=True)
+        HBNB_MYSQL_USER = getenv('hbnb_dev')
+        HBNB_MYSQL_PWD = getenv('hbnb_dev_pwd')
+        HBNB_MYSQL_HOST = getenv('localhost')
+        HBNB_MYSQL_DB = getenv('hbnb_dev_db')
+        HBNB_ENV = getenv('db')
 
-        if getenv('HBNB_ENV') == 'test':
-            Base.metadata.drop_all(self.__engine)
-            Base.metadata.create_all(self.__engine)
 
     def all(self, cls=None):
         objects = {}
