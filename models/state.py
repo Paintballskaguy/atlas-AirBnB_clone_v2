@@ -8,7 +8,7 @@ from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 from models import storage
-from models import City
+from models.city import City
 
 
 class State(BaseModel, Base):
@@ -31,8 +31,8 @@ class State(BaseModel, Base):
             
     @property
     def cities(self):
-        """Return a list of City instances related to the current State."""
-        if storage._FileStorage__objects:
-            all_cities = storage.all(City).values()
-            return [city for city in all_cities if city.state_id == self.id]
+        """Returns the list of City objects related to the current State."""
+        if storage.__class__.__name__ != 'DBStorage':
+            # Return a list of City instances related to this State
+            return [city for city in storage.all(City).values() if city.state_id == self.id]
         return []

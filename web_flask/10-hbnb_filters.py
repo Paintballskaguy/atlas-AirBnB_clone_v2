@@ -4,11 +4,12 @@ This script starts a Flask web application to display filters for AirBnB.
 """
 
 from flask import Flask, render_template
-from models import storage
-from models.state import State
 from models.amenity import Amenity
+from models.state import State
+from models import storage
 
 app = Flask(__name__)
+
 
 @app.teardown_appcontext
 def teardown_db(exception):
