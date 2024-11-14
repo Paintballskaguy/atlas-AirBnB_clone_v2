@@ -1,22 +1,23 @@
 #!/usr/bin/python3
 """
-User class that inherits from BaseModel
+User class that inherits from BaseModel and Base
 """
 
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
+from os import getenv
 
 
 class User(BaseModel, Base):
     """
     User class that inherits from BaseModel and Base
     Public class attributes:
-        __tablename__: string - name of the table
-        email: string - empty string
-        password: string - empty string
-        first_name: string - empty string
-        last_name: string - empty string
+        __tablename__: name of the MySQL table ('users')
+        email: Column - string with max length of 128, cannot be null
+        password: Column - string with max length of 128, cannot be null
+        first_name: Column - string with max length of 128, nullable
+        last_name: Column - string with max length of 128, nullable
         places: relationship with Place class
         reviews: relationship with Review class
     """
@@ -25,15 +26,7 @@ class User(BaseModel, Base):
     password = Column(String(128), nullable=False)
     first_name = Column(String(128), nullable=True)
     last_name = Column(String(128), nullable=True)
-    places = relationship("Place", cascade="all, delete-orphan",
-                          backref="user")
-    reviews = relationship("Review", cascade="all, delete-orphan",
-                           backref="user")
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        if not kwargs:
-            self.email = ""
-            self.password = ""
-            self.first_name = ""
-            self.last_name = ""
+    if getenv("HBNB_TYPE_STORAGE") == "db":
+        places = relationship("Place", cascade="all, delete-orphan", backref="user")
+        reviews = relationship("Review", cascade="all, delete-orphan", backref="user")

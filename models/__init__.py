@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 from os import getenv
 
 
-storage = None
+
 engine_url = f'mysql+pymysql://{getenv("HBNB_MYSQL_USER")}:{getenv("HBNB_MYSQL_PWD")}@{getenv("HBNB_MYSQL_HOST")}/{getenv("HBNB_MYSQL_DB")}'
 engine = create_engine(engine_url, pool_pre_ping=True)
 

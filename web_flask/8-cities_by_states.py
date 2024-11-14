@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This script starts a Flask web application to show states and cities.
+This script starts a Flask web application to display states and their cities.
 """
 
 from flask import Flask, render_template

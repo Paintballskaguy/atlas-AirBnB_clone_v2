@@ -1,51 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>AirBnB clone</title>
-		<link rel="shortcut icon" href="{{ url_for('static', filename='images/icon.png') }}">
+<head>
+    <title>AirBnB Filters</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/icon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/4-common.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/3-header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/3-footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/6-filters.css') }}">
 
-		<link rel="stylesheet" href="{{ url_for('static', filename='styles/4-common.css') }}">
-		<link rel="stylesheet" href="{{ url_for('static', filename='styles/3-header.css') }}">
-		<link rel="stylesheet" href="{{ url_for('static', filename='styles/3-footer.css') }}">
-		<link rel="stylesheet" href="{{ url_for('static', filename='styles/6-filters.css') }}">
-	</head>
-    <body>
-		<header>
-			<div id="header_logo">
-				<img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo">
-			</div>
-		</header>
-		<div class="container">
-			<section class="filters">
-				<button>Search</button>
-				<div class="locations">
-					<h3>States</h3>
-					<h4>&nbsp;</h4>
-					<ul class="popover">
-						{% for state in states %}
-						<li><h2>{{ state.name }}</h2>
-							<ul>
-								{% for city in state.cities | sort(attribute='name') %}
-								<li><h4>{{ city.name }}</h4></li>
-								{% endfor %}
-							</ul>
-						</li>
-						{% endfor %}
-					</ul>
-				</div>
-				<div class="amenities">
-					<h3>Amenities</h3>
-					<h4>&nbsp;</h4>
-					<ul class="popover">
-						{% for amenity in amenities %}
-						<li><h4>{{ amenity.name }}</h4></li>
-						{% endfor %}
-					</ul>
-				</div>
-			</section>
-		</div>
-		<footer>
-			<p>Holberton School</p>
-		</footer>
-	</body>
+    <style>
+        /* Additional styling for layout consistency */
+        .filters {
+            padding: 20px;
+        }
+        .locations, .amenities {
+            margin-bottom: 20px;
+        }
+        .search {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div id="header_logo">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo">
+        </div>
+    </header>
+
+    <!-- Container for Filters -->
+    <div class="container">
+        <section class="filters">
+
+            <!-- Locations Section for States and Cities -->
+            <div class="locations">
+                <h3>States</h3>
+                <h4>&nbsp;</h4>
+                <ul class="popover">
+                    {% for state in states|sort(attribute="name") %}
+                    <li>
+                        <h2>{{ state.name }}</h2>
+                        <ul>
+                            {% for city in state.cities|sort(attribute="name") %}
+                            <li>{{ city.name }}</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Amenities Section -->
+            <div class="amenities">
+                <h3>Amenities</h3>
+                <h4>&nbsp;</h4>
+                <ul class="popover">
+                    {% for amenity in amenities|sort(attribute="name") %}
+                    <li>{{ amenity.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Left-Aligned Search Button -->
+            <button class="search">Search</button>
+        </section>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>Tulsa Atlas School</p>
+    </footer>
+
+</body>
 </html>

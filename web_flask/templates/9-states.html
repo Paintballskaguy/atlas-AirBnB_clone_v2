@@ -1,26 +1,35 @@
 <!DOCTYPE html>
-<HTML lang="en">
-    <HEAD>
-        <TITLE>HBNB</TITLE>
-    </HEAD>
-    <BODY>
-        {% if not_found %}
-        <H1>Not found!</H1>
-        {% elif state %}
-        <H1>State: {{ state.name }}</H1>
-        <H3>Cities:</H3>
-        <UL>
-            {% for city in state.cities | sort(attribute='name') %}
-            <LI>{{ city.id }}: <B>{{ city.name }}</B></LI>
+<html lang="en">
+<head>
+    <title>HBNB</title>
+</head>
+<body>
+
+    <h1>States and Cities</h1>
+
+    {% if not_found %}
+        <p>State not found</p>
+    {% elif single_state %}
+        <h2>{{ states[0].name }}</h2>
+        <ul>
+            {% for city in states[0].cities | sort(attribute='name') %}
+                <li>{{ city.name }}</li>
             {% endfor %}
-        </UL>
-        {% else %}
-        <H1>States</H1>
-        <UL>
-            {% for state in states | sort(attribute='name') %}
-            <LI>{{ state.id }}: <B>{{ state.name }}</B></LI>
+        </ul>
+    {% else %}
+        <ul>
+            {% for state in states %}
+                <li>
+                    <h2>{{ state.name }}</h2>
+                    <ul>
+                        {% for city in state.cities | sort(attribute='name') %}
+                            <li>{{ city.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </li>
             {% endfor %}
-        </UL>
-        {% endif %}
-    </BODY>
-</HTML>
+        </ul>
+    {% endif %}
+
+</body>
+</html>
