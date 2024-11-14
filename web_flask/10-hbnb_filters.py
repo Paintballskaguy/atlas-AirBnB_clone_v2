@@ -19,8 +19,11 @@ def close_database(exception):
 def hbnb_filters():
     """Renders the template displaying states with cities and amenities."""
     states = sorted(storage.all(State).values(), key=lambda state: state.name)
-    amenities = sorted(storage.all(Amenity).values(), key=lambda amenity: amenity.name)
-    
+    #amenities = sorted(storage.all(Amenity).values(), key=lambda amenity: amenity.name)
+    amenities = [
+        {"name": amenity.name} for amenity in sorted(storage.all(Amenity).values(), key=lambda a: a.name)
+    ]
+    print("Transformed Amenities:", amenities)
     return render_template("10-hbnb_filters.html", states=states, amenities=amenities)
 
 if __name__ == "__main__":

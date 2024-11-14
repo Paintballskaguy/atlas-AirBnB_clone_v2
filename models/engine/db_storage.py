@@ -1,7 +1,11 @@
+#!/usr/bin/python3
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from models.base_model import Base
+from models.amenity import Amenity
 from os import getenv
+from models import *
 
 class DBStorage:
     __engine = None
