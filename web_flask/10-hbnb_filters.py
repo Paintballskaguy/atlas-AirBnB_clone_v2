@@ -3,7 +3,7 @@
 This script starts a Flask web application to display filters for AirBnB.
 """
 
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template
 from models import storage
 from models.state import State
 from models.amenity import Amenity
@@ -14,11 +14,6 @@ app = Flask(__name__)
 def close_database(exception):
     """Close the database after each request."""
     storage.close()
-
-@app.route("/", strict_slashes=False)
-def index():
-    """Redirects to the /hbnb_filters route."""
-    return redirect(url_for('hbnb_filters'))
 
 @app.route("/hbnb_filters", strict_slashes=False)
 def hbnb_filters():

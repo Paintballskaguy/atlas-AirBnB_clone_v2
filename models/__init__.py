@@ -1,11 +1,10 @@
-#!/bin/usr/python3
+#!/usr/bin/python3
 
+from os import getenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
-from os import getenv
 
-
-
+# Construct the engine URL based on environment variables
 engine_url = f'mysql+pymysql://{getenv("HBNB_MYSQL_USER")}:{getenv("HBNB_MYSQL_PWD")}@{getenv("HBNB_MYSQL_HOST")}/{getenv("HBNB_MYSQL_DB")}'
 engine = create_engine(engine_url, pool_pre_ping=True)
 
@@ -14,6 +13,7 @@ if getenv('HBNB_TYPE_STORAGE') == 'db':
     from models.engine.db_storage import DBStorage
     storage = DBStorage()
 else:
+    # Initialize FileStorage for file-based storage
     from models.engine.file_storage import FileStorage
     storage = FileStorage()
 
@@ -25,4 +25,5 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 
+# Load data from storage
 storage.reload()
